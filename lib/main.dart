@@ -34,7 +34,7 @@ class ParkingApp extends ConsumerWidget {
       theme: ThemeData(
      //
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
+      ), //
       home: authState.when(
         data: (user) {
           if (user != null) {
