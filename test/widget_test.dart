@@ -1,30 +1,37 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:parkingapp/main.dart';
+import 'package:parkingapp/Features/parking/models/vehiclez_model.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  group('Parking Fee Calculation Tests', () {
+    test('First 30 minutes fee should be ₹20', () {
+      expect(calculateParkingFee(const Duration(minutes: 0)), 20);
+      expect(calculateParkingFee(const Duration(minutes: 15)), 20);
+      expect(calculateParkingFee(const Duration(minutes: 30)), 20);
+    });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    test('31-90 minutes fee should be ₹50', () {
+      expect(calculateParkingFee(const Duration(minutes: 31)), 50);
+      expect(calculateParkingFee(const Duration(minutes: 60)), 50);
+      expect(calculateParkingFee(const Duration(minutes: 90)), 50);
+    });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    test('91-150 minutes fee should be ₹80', () {
+      expect(calculateParkingFee(const Duration(minutes: 91)), 80);
+      expect(calculateParkingFee(const Duration(minutes: 120)), 80);
+      expect(calculateParkingFee(const Duration(minutes: 150)), 80);
+    });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    test('151+ minutes fee continues +₹30 per hour', () {
+      expect(calculateParkingFee(const Duration(minutes: 151)), 110);
+      expect(calculateParkingFee(const Duration(minutes: 210)), 110);
+      expect(calculateParkingFee(const Duration(minutes: 211)), 140);
+    });
+
+    test('Duration formatting works in HH:mm:ss format', () {
+      expect(
+        formatParkingDuration(const Duration(hours: 1, minutes: 42, seconds: 15)),
+        '01:42:15',
+      );
+    });
   });
 }
