@@ -32,7 +32,7 @@ class ParkingApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       title: 'Parking App',
       theme: ThemeData(
-     
+     //
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home: authState.when(
