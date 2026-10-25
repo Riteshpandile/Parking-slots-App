@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # parkingapp
 
 A new Flutter project.
@@ -14,3 +15,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# Parking-slots-App
+>>>>>>> e7f309627febf43171e1da4bfd3b8925cfb6a1f3
